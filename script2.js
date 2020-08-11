@@ -63,23 +63,24 @@ function detectPersonaLevel() {
 
 detectPersonaLevel();
 
-function showMyDB() {
-    while (personalMovieDB.privat == false) {
-        console.log("Main obj");
+function showMyDB(hidden) {
+    if (!hidden) {
+        console.log(personalMovieDB);
     }
 }
 
-showMyDB();
+showMyDB(personalMovieDB.privat);
 
 function writeYourGenres() {
-    for(let i = 0; i < 2; i++) {
-        let gen = prompt("Ваш любимый жанр?", "");
-        gen = prompt("Ваш любимый жанр?", "");
+    for(let i = 1; i <= 3; i++) {
+        const gen = prompt(`Ваш любимый жанр? ${i}`); 
     if (gen != null && gen != "" && gen.length < 25) { 
-        personalMovieDB.genres = [];
+        personalMovieDB.genres[i - 1] = gen;
         console.log("Awesome");
-    } else {console.log("fail");
-}
+    } else { 
+        console.log("fail");
+        i--;
+    }
 }
 }
 
