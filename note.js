@@ -87,3 +87,5 @@ arr.sort(compareNum);              //метод для сортировки ма
 function compareNum(a, b) {        //функция для сравнения чисел
     return a - b;
 }
+
+
