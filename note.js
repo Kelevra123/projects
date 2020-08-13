@@ -184,3 +184,24 @@ log(...webs);             // функция читает норм данные (
 const array = ['a', 'b', ];
 const newAarray = [...array]; // упрощаем развернутый массив до переменной и пользуем ее
 
+// *****Немного о наследовании обьектом свойств*****
+const dk = {
+    health: 10000,
+    attack: 750,
+    defence: 600,
+    speed: 100
+};
+
+const chow = {
+    health: 12500
+};
+
+Object.setPrototypeOf(chow, dk); //наследует свойства где первый в скобках кто наследует. 2 от кого
+
+const leo = Object.create(dk);
+
+const laika = Object.create(dk);// формат когда изначально наследует свойства 
+console.log(chow.health, chow.defence);
+console.log(laika.health, laika.speed);
+// *****Немного о наследовании обьектом свойств*****
+
