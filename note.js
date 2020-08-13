@@ -57,6 +57,78 @@ for (let key in options) {
     console.log(`Свойство ${key} имеет значение ${options[key]}`); // достает ключи ${key} ${имя обьекта[key]}
 }                                                                  // достает значения
 }
+
+let a = 5, //При работе с примитивами переменная принимает значение a = 5 в этом случае
+    b = a;
+
+b = b + a;
+
+console.log(b);
+console.log(a);
+
+const obj = {  //При работе с объектами переменная принимает ссылку на сам объект
+    a: 5,      // и после этого изменяет структуру объекта copy != copy; copy = obj;
+    b: 10
+};
+
+const copy = obj;
+copy.a = 10;
+
+console.log(copy);
+console.log(obj);
+
+
+function copy2(mainObj) {  // Функция которая копирует обьект для изменения свойств
+    let objCopy = {};
+
+    let key;
+    for(key in mainObj) {
+        objCopy[key] = mainObj[key];
+    }
+
+    return objCopy;  // результат копирования
+}
+
+const numbers = {  // объект которым оперирует функция(который копирует)
+    a: 2,
+    b: 5,
+    c: {
+        x: 7,
+        y: 4
+    }
+};
+
+const newNumbers = copy2(numbers); // новая переменная, которая равна результату функции copy2(mainObj)
+
+newNumbers.a = 10; // меняет скопированные ключи не затрагивая оригинальный объект
+newNumbers.c.x = 10; // но при смене ключей вложенного объекта значения меняются и в оригинале
+
+// console.log(newNumbers);
+// console.log(numbers);
+
+const add = {
+    d: 34,
+    e: 25
+};
+
+console.log(Object.assign(numbers, add)); //объединяет два объекта
+
+const clone = Object.assign({}, add); //Более простой способ копирования объекта пустой объект +
+                                      // + объект который нужно скопировать = копия object.assign
+clone.d = 20;
+console.log(add);
+console.log(clone);
+
+const q = {         // Наиболее простой способ копирования объекта 
+    one: 1,
+    two: 2
+};
+
+const newObj = {...q}; // Развернули как конфету и отдали уже не как ссылку а как значения УРА
+newObj.one = 55;
+console.log(newObj);
+console.log(q);
+
 //             *******************ВСЕ О ОБЪЕКТАХ*****************************
 
 
@@ -88,4 +160,27 @@ function compareNum(a, b) {        //функция для сравнения ч
     return a - b;
 }
 
+const oldArray = ["a", "b", "c"];
+const newArray = oldArray.slice(); // Метод копирования массива 
+
+newArray[1] = "asdasdasd"; // Задаю новое значение для элемента скопированного массива №1
+
+
+const video = ['youtube', 'vimeo', 'rutube'],
+      blogs = ['wordpress', 'livejournal', 'blogger'],
+      internet = [...video, ...blogs, 'vk', 'facebook']; // ... - оператор разворота массива
+      // он вытаскивает содержимое одного массива сохраняя порядок данных и передает другому - все
+console.log(internet);
+
+function log(a, b, c) {  // функция не может использовать массив напрямую 
+    console.log(a);
+    console.log(b);
+    console.log(c);
+}
+
+const webs = [1, 5, 76]; // массив нужно "развернуть как конфетку" - ... разворачивают массив
+log(...webs);             // функция читает норм данные (какие угодно не только цифры)
+
+const array = ['a', 'b', ];
+const newAarray = [...array]; // упрощаем развернутый массив до переменной и пользуем ее
 
