@@ -204,4 +204,66 @@ const laika = Object.create(dk);// формат когда изначально 
 console.log(chow.health, chow.defence);
 console.log(laika.health, laika.speed);
 // *****Немного о наследовании обьектом свойств*****
+ 
+ // **** Динамическая типизация ****
+// Способ превратить число в строку + (конкантинация есть еще)
+ const fontSize = 25 + "px"; //превращаем число в строку для дальнейшего использования в таком виде
+// Способы первратить строку в число (унарный плюс, и метод parseInt("", 10-(десятичная система)))
+console.log(typeof(+"5"));
+console.log(typeof(parseInt("15px", 10)));
+// Превращение в булиновое значиние false true
+//0, "", null, undefined, NaN - всегда false по умолчанию, все остальное true
+//1 способ
+let switcher = null;
+
+if (switcher) {
+    console.log("working..."); //не работае код так как switcher - false 
+}
+
+switcher = 1;
+
+if (switcher) {
+    console.log("working..."); // работает код так как switcher - true 
+}
+// 2 способ
+console.log(typeof(!!"4444")); // - !! превращают примитив в булиновое значение
+console.log(2 && 1 && null && 32); // и запинается на лжи а или на правде
+
+// Получение элементов со страницы HTML и работа с ними
+const box = document.getElementById("box"); // получаем элемент по id только 1 
+const btns = document.getElementsByTagName('button'); // вытаскиваем все с тегом <button></button>
+// и получаем массив данный [button, button и тд] чтобы обратится btns[0] или btns[2] и тд
+const circles = document.getElementsByClassName('circle');//все элементы класса circle по той же схеме
+const hearts = document.querySelectorAll(".heart");// вытащит все элементы с классом heart по слектору css
+//и также даст возможность использовать метод forEach() что удобно
+hearts.forEach(item => {
+    console.log(item);
+});// выведет все данные масива списком
+const oneHeart = document.querySelector("div");//вытащит первый елемент с селектором div(любой css селектор)
+
+box.style.cssText = `background-color: blue; width: 500px`; // работа со стилями внутри js 
+// обращаемся к переменной которая втащила елемент(box, btns), после говорим что меняем стиль
+//.style и чтобы писать не камелкейс .cssText и меняем стиль динамично если нужно
+btns[1].style.borderRadius = '100%';// для вытащеных массивов указываем позицию в масиве
+
+hearts.forEach(item => {
+    item.style.backgroundColor = "blue";
+}); // применяю ко всем елементам массива который вытащил
+
+const div = document.createElement('div');// создает <div></div> но только внутри js
+div.classList.add('black'); // Я создал <div></div> выше и поместил его в переменную div
+// теперь я говорю ему наследовать CSS стили для класса black или любого другого через переменную
+hearts.append(div); // таким способом я добавляю его в html структуру после массива hearts (в конец)
+hearts.prepend(div); // а так перед массивом hearts в начало
+hearts[0].before(div); // обращаюсь к индексу в массиве и вставляю перед этим индексом
+hearts[0].after(div); // обращаюсь к индексу и вставляю после него 
+hearts[0].remove(); // удилил сердце под индексом [0]
+hearts[0].replaceWith(circles[0]);// заменил сердце кружком 
+//ВЫШЕ МЕТОДЫ ПОСТРОЕНИЯ HTML СТРУКТУРЫ В JS 
+div.innerHTML = "<h1>Hello World</h1>";// помещает html структуру 
+div.textContent = "текст сюда можно воодить в в div выводить";//работает только с текстом а не структурой
+div.insertAdjacentHTML("", "<h2>Hello</h2>");// добавляет структуру в элемент по следующему принципу
+//beforebegin - перед элементом (div в данном случае), afterend - после елемента div
+//afterbegin - в элемент в начало, beforeend - в элемент в конец "h2" - то что помещаем 
+
 
